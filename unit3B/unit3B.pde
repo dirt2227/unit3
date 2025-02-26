@@ -3,15 +3,12 @@ color reseda = #718355;
 color moss = #87986A;
 color dolive = #97A97C;
 color lolive = #B5C99A;
-color tea = #CFE1B9;
 
 int toggle;
 
 void setup()  {
   size(800, 600);
   strokeWeight(4);
-  textSize(30);
-  
   toggle = 1;
 }
 
@@ -29,7 +26,7 @@ void draw()  {
 }
 
 void mouseReleased()  {
-   if (mouseX > 100 && mouseX < 300 && mouseY > 450 && mouseY < 550); {
+   if (mouseX > 100 && mouseX < 300 && mouseY > 450 && mouseY < 550) {
      toggle = toggle * -1;
    }  
 }
