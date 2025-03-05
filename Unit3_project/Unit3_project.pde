@@ -22,23 +22,55 @@ color dgrey = #525252;
 color lgrey = #CCCCCC;
 color s = #A3A3A3;
 
-
-
+int linecolor;
+PImage star;
+float sliderY;
 
 
 void setup() {
   size(800, 700);
-}
-
-void draw() {
-  
-    strokeWeight(3);
-  //indicator
+      strokeWeight(3);
+          //indicator
   fill(255);
   rect(150, 50, 640, 500, 20);
+  
+linecolor = black;
+  star = loadImage("star.png");
+  star.resize(100,100);
+  sliderY = 100;
+ 
+}
 
+
+
+void draw() {
+ strokeWeight(3);
+ 
+//sticker 
+ image(star, 50, 50);
+  
+  circle(70, 620, 100);
+  
+  
+  //ref
+  rect(20, 510, 100, 30);
+  
+  //slider bar
+  rect(20, 60, 100, 430, 20);
+ 
+ 
   //holds colors
+  stroke(0);
   rect(150, 570, 640, 100, 20);
+  
+  //save
+ rect(600, 575, 100, 30);
+ 
+ //load
+ 
+ 
+ //clear
+ 
 
   //pink-------------------------------------------------------
   fill(orchid);
@@ -128,11 +160,16 @@ void draw() {
 
   line(0, 50, 800, 50);
 
-  //pencil
-  circle(50, 80, 50);
+  image(star, 50, 50);
 
-  //eraser
-  circle(50, 160, 50);
+  strokeWeight(5);
+  line(70, 100, 70, 450);
+  circle(70, sliderY, 50);
+
+
+
+  
+
 }//end===================================================================
 
 
@@ -146,4 +183,103 @@ void tactile(int x, int y, int w) {
   {
     stroke(black);
   }
+}
+
+
+void mouseDragged()  {
+  stroke(linecolor);
+line(pmouseX, pmouseY, mouseX, mouseY);
+
+
+
+controlSlider();
+  
+}
+
+void controlSlider()  {
+  if (mouseY > 100 && mouseY < 450 && mouseX > 45 && mouseX < 95 ) {
+  sliderY = mouseY;
+  }
+  
+}
+
+void mouseReleased()  {
+   controlSlider();
+  
+  
+  
+   if (mouseX > 170 && mouseX < 200 && mouseY > 580 && mouseY < 610)  {
+   linecolor = orchid;
+ } 
+ 
+  if (mouseX > 170 && mouseX < 200 && mouseY > 630 && mouseY < 660)  {
+   linecolor = pinklav;
+ } 
+ 
+  if (mouseX > 210 && mouseX < 240 && mouseY > 580 && mouseY < 610)  {
+   linecolor = brightpi;
+ } 
+ 
+   if (mouseX > 210 && mouseX < 240 && mouseY > 630 && mouseY < 660)  {
+   linecolor = tearo;
+ } 
+ 
+   if (mouseX > 250 && mouseX < 280 && mouseY > 580 && mouseY < 610)  {
+   linecolor = sandy;
+ } 
+ 
+   if (mouseX > 250 && mouseX < 280 && mouseY > 630 && mouseY < 660)  {
+   linecolor = champ;
+ } 
+ 
+    if (mouseX > 290 && mouseX < 320 && mouseY > 580 && mouseY < 610)  {
+   linecolor = maize;
+ } 
+ 
+   if (mouseX > 290 && mouseX < 320 && mouseY > 630 && mouseY < 660)  {
+   linecolor = lemon;
+ } 
+ 
+     if (mouseX > 330 && mouseX < 360 && mouseY > 580 && mouseY < 610)  {
+   linecolor = scream;
+ } 
+ 
+   if (mouseX > 330 && mouseX < 360 && mouseY > 630 && mouseY < 660)  {
+   linecolor = cel;
+ } 
+ 
+  if (mouseX > 370 && mouseX < 400 && mouseY > 580 && mouseY < 610)  {
+   linecolor = vividsky;
+ } 
+ 
+   if (mouseX > 370 && mouseX < 400 && mouseY > 630 && mouseY < 660)  {
+   linecolor = nonpblue;
+ } 
+ 
+ if (mouseX > 410 && mouseX < 440 && mouseY > 580 && mouseY < 610)  {
+   linecolor = amethyst;
+ } 
+ 
+   if (mouseX > 410 && mouseX < 440 && mouseY > 630 && mouseY < 660)  {
+   linecolor = mauve;
+ } 
+ 
+ if (mouseX > 450 && mouseX < 480 && mouseY > 580 && mouseY < 610)  {
+   linecolor = black;
+ } 
+ 
+   if (mouseX > 450 && mouseX < 480 && mouseY > 630 && mouseY < 660)  {
+   linecolor = dgrey;
+ } 
+ 
+ if (mouseX > 490 && mouseX < 520 && mouseY > 580 && mouseY < 610)  {
+   linecolor = lgrey;
+ } 
+ 
+   if (mouseX > 490 && mouseX < 520 && mouseY > 630 && mouseY < 660)  {
+   linecolor = 255;
+ } 
+ 
+
+ 
 }
