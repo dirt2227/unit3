@@ -26,6 +26,8 @@ int linecolor;
 PImage star;
 float sliderY;
 
+boolean starOn;
+
 
 void setup() {
   size(800, 700);
@@ -38,6 +40,8 @@ linecolor = black;
   star = loadImage("star.png");
   star.resize(100,100);
   sliderY = 100;
+  
+  starOn = false;
  
 }
 
@@ -46,12 +50,15 @@ linecolor = black;
 void draw() {
  strokeWeight(3);
  
-//sticker 
- image(star, 50, 50);
-  
+//sticker
+  tactilec(70, 620, 50);
+  starOnOff();
   circle(70, 620, 100);
-  
-  
+ image(star, 22, 570);
+
+fill(255);
+    strokeWeight(3);
+  stroke(black);
   //ref
   rect(20, 510, 100, 30);
   
@@ -64,13 +71,13 @@ void draw() {
   rect(150, 570, 640, 100, 20);
   
   //save
- rect(600, 575, 100, 30);
+ rect(550, 575, 100, 40);
  
  //load
- 
+ rect(550, 625, 100, 40);
  
  //clear
- 
+ rect(670, 600, 100, 40);
 
   //pink-------------------------------------------------------
   fill(orchid);
@@ -160,7 +167,6 @@ void draw() {
 
   line(0, 50, 800, 50);
 
-  image(star, 50, 50);
 
   strokeWeight(5);
   line(70, 100, 70, 450);
@@ -185,13 +191,24 @@ void tactile(int x, int y, int w) {
   }
 }
 
+void tactilec(int x, int y, int r)  {
+  if (dist(x, y, mouseX, mouseY) < r) {
+    fill(s);
+  }else { stroke(0);
+  }
+}
 
 void mouseDragged()  {
+if (starOn == false) {
+  //squigglyline
   stroke(linecolor);
 line(pmouseX, pmouseY, mouseX, mouseY);
+} else {
+ image(star, mouseX, mouseY, 100, 100); 
+}
 
 
-
+stroke(black);
 controlSlider();
   
 }
@@ -203,10 +220,29 @@ void controlSlider()  {
   
 }
 
+
+void starOnOff()  {
+
+  if (starOn == true)  {
+    stroke(maize);
+    strokeWeight(4);
+} else  {
+  stroke(0);
+    strokeWeight(3);
+   
+}
+}
+
+
 void mouseReleased()  {
+  
+  strokeWeight(3);
    controlSlider();
   
+  if (mouseX > 22 && mouseX < 122 && mouseY > 570 && mouseY < 670) {
+  starOn = !starOn;
   
+  }
   
    if (mouseX > 170 && mouseX < 200 && mouseY > 580 && mouseY < 610)  {
    linecolor = orchid;
