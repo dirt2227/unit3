@@ -28,26 +28,35 @@ float sliderY;
 
 boolean starOn;
 
+float thick;
+
 
 void setup() {
   size(800, 700);
       strokeWeight(3);
+      background(#F7DFE9);
           //indicator
   fill(255);
   rect(150, 50, 640, 500, 20);
   
+
 linecolor = black;
   star = loadImage("star.png");
   star.resize(100,100);
   sliderY = 100;
   
   starOn = false;
+  textSize(30);
+  
+  thick = 1;
  
 }
 
 
 
 void draw() {
+  
+  
  strokeWeight(3);
  
 //sticker
@@ -59,10 +68,16 @@ void draw() {
 fill(255);
     strokeWeight(3);
   stroke(black);
+ 
   //ref
-  rect(20, 510, 100, 30);
+  rect(5, 515, 130, 30, 20);
+  stroke(linecolor);
+  strokeWeight(thick);
+  line(20, 530, 120, 530);
   
+   strokeWeight(3);
   //slider bar
+  stroke(0);
   rect(20, 60, 100, 430, 20);
  
  
@@ -71,13 +86,25 @@ fill(255);
   rect(150, 570, 640, 100, 20);
   
   //save
+  tactiler(550, 575, 100, 40);
+   fill(255);
  rect(550, 575, 100, 40);
+   fill(0);
+  text("Save", 570, 605);
  
  //load
+ tactiler(550, 625, 100, 40);
+  fill(255);
  rect(550, 625, 100, 40);
+   fill(0);
+  text("Load", 570, 655);
  
  //clear
+tactiler(670, 600, 100, 40);
+   fill(255);
  rect(670, 600, 100, 40);
+  fill(0);
+  text("Clear", 690, 630);
 
   //pink-------------------------------------------------------
   fill(orchid);
@@ -179,6 +206,17 @@ fill(255);
 }//end===================================================================
 
 
+void tactiler(int x, int y, int w, int h) {
+   if (mouseX > x && mouseX < x + w &&
+    mouseY > y && mouseY < y + h) {
+    stroke(s);
+  } else
+
+  {
+    stroke(black);
+  }
+}
+
 
 void tactile(int x, int y, int w) {
   if (mouseX > x && mouseX < x + w &&
@@ -199,17 +237,28 @@ void tactilec(int x, int y, int r)  {
 }
 
 void mouseDragged()  {
-if (starOn == false) {
+if(mouseX > 150 && mouseX < 790 && mouseY > 50 && mouseY < 550) {
+
+  if (starOn == false) {
   //squigglyline
   stroke(linecolor);
+  strokeWeight(thick);
 line(pmouseX, pmouseY, mouseX, mouseY);
 } else {
  image(star, mouseX, mouseY, 100, 100); 
+ 
+}
 }
 
 
 stroke(black);
 controlSlider();
+
+if (mouseX > 150 && mouseX > 790 && mouseY > 50 && mouseY > 550) {
+
+}
+
+
   
 }
 
@@ -218,6 +267,7 @@ void controlSlider()  {
   sliderY = mouseY;
   }
   
+ thick = map(sliderY, 100, 450, 1, 30);
 }
 
 
@@ -316,6 +366,37 @@ void mouseReleased()  {
    linecolor = 255;
  } 
  
-
+if (mouseX > 550 && mouseX < 650 && mouseY > 575 && mouseY < 615) {
+  selectOutput("Choose a name for your new image file",  "saveImage");
+}
  
+ if (mouseX > 550 && mouseX < 650 && mouseY > 625 && mouseY < 665) {
+   selectInput ("Pick an image to load", "openImage");
+}
+
+if (mouseX > 670 && mouseX < 770 && mouseY > 600 && mouseY < 640) {
+  fill(255);
+  rect(150, 50, 640, 500, 20);
+}
+
+}
+
+void saveImage(File f)  {
+  if (f != null) {
+    PImage canvas = get( 150, 50, 640, 500);
+   canvas.save(f.getAbsolutePath());
+}
+    
+}
+
+void openImage(File f) {
+ if (f != null) { 
+   int n = 0;
+   while ( n < 100) {
+     PImage pic = loadImage(f.getPath());
+     image(pic, 0, 0);
+     n = n + 1;
+   }
+ }
+  
 }
